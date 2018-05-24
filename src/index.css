@@ -1,5 +1,255 @@
-body {
+@import url("https://fonts.googleapis.com/css?family=Coiny|Open+Sans");
+:root {
+  --color-primary: #4ecdc4;
+  --bg-light: #fcfcfc;
+  --text-dark: #192a56;
+  --text-light: #636e72;
+  --color-positive: #00b16a;
+  --color-negative: #f03434;
+  --shadow-z-1: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  --shadow-z-2: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-z-3: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
+  --border-radius: 2px;
+  --transition-speed: 0.25s;
+}
+
+* {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+}
+
+html {
+  font: 100%/1.5 "Open Sans", sans-serif;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: var(--color-primary);
+  color: var(--text-dark);
+  overflow: hidden;
+  perspective: 500px;
+}
+
+.loading .container {
+  opacity: 0;
+  transform: rotateX(10deg) translateY(10px);
+  transition: all var(--transition-speed) ease-out;
+}
+
+.is-loaded .container {
+  opacity: 1;
+  transform: rotateX(0) translateY(0);
+  transition: all var(--transition-speed) ease-out;
+}
+
+body,
+input,
+button {
+  -webkit-font-smoothing: antialiased;
+}
+
+a,
+a:active,
+a:focus,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.17rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+h5 {
+  font-size: 0.83rem;
+}
+
+h6 {
+  font-size: 0.75rem;
+}
+
+p {
+  line-height: 1.25;
+  margin: 0 0 1em;
+}
+
+.positive {
+  color: var(--color-positive);
+}
+
+.negative {
+  color: var(--color-negative);
+}
+
+input {
+  display: block;
+  padding: 0.75rem;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--border-radius);
+  transition: var(--transition-speed);
+}
+
+input:focus {
+  border: 2px solid var(--text-dark);
+  outline: 0;
+}
+
+.navbar {
+  background: var(--bg-light);
+  position: fixed;
+  width: 100%;
+  padding: 1rem 0vh;
+  text-align: center;
+  font-family: "Coiny", cursive;
+  color: var(--color-primary);
+  box-shadow: var(--shadow-z-1);
+  z-index: 2;
+}
+
+.navbar__logo {
+  font-size: 2rem;
+}
+
+.navbar__emoji {
+  display: inline-block;
+  transform-origin: center;
+  animation: spin 15s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+}
+
+.main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  background: var(--color-primary);
+  z-index: 1;
+}
+
+.loader__emoji {
+  font-size: 4rem;
+}
+
+.loader__text {
+  color: var(--text-dark);
+  font-size: 1.5rem;
+}
+
+.search-bar {
+  text-align: center;
+}
+
+.search-bar__input {
+  margin: auto;
+  width: 80%;
+}
+
+.container {
+  background: var(--bg-light);
+  box-shadow: var(--shadow-z-3);
+  padding: 2rem 1rem;
+  text-align: center;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.results__text {
+  color: var(--text-light);
+}
+
+.results__header {
+  font-size: 5rem;
+  line-height: 1;
+  margin-bottom: 1rem;
+  transform-origin: center;
+}
+
+.thinker {
+  color: var(--text-light);
+}
+
+.thinker span {
+  display: inline-block;
+  animation-name: float;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+}
+
+.thinker span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.thinker span:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+@keyframes spin {
+  0%,
+  95% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+@media (min-width: 480px) {
+  .container {
+    width: 40%;
+    min-width: 350px;
+    max-width: 500px;
+  }
 }
