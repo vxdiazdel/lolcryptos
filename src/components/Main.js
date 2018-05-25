@@ -13,7 +13,6 @@ class Main extends Component {
             isFetching: false,
             isTyping: false,
             data: [],
-            cryptos: {},
             currentCrypto: {
                 name: "Bitcoin",
                 symbol: "BTC",
@@ -34,6 +33,7 @@ class Main extends Component {
 
     componentDidMount() {
         document.body.classList.add("loading");
+        this.fetchData();
         setTimeout(() => {
             this.setState({
                 pageLoading: false
@@ -41,7 +41,6 @@ class Main extends Component {
             document.body.classList.remove("loading");
             document.body.classList.add("is-loaded");
         }, 3000);
-        this.fetchData();
     }
 
     async onTextChange(e) {
@@ -112,14 +111,8 @@ class Main extends Component {
 
         const response = await fetch(`${CRYPTO_URL}/${crypto.id}/`);
         const result = await response.json();
-        const { name, symbol } = result.data;
-
-        const obj = Object.assign({}, this.state.cryptos);
-        obj[name] = result.data;
-        obj[symbol] = result.data;
 
         await this.setState({
-            cryptos: obj,
             currentCrypto: result.data,
             isFetching: false
         });
